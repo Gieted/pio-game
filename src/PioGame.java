@@ -1,8 +1,8 @@
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Gra w odgadywanie wylosowanej liczby.
- *
+ * <p>
  * Zasady:
  * - mistrz gry (komputer) rzuca kostką (losuje liczby z zakresu 1..6)
  * - gracz (też komputer) stara się odgadnąć liczbę (też losuje)
@@ -15,28 +15,24 @@ public class PioGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        Player player = new Player("Paweł", random);
 
-        Random rand = new Random();     //obiekt losujący
-        int number;                     //wylosowana liczba
-        int guess;                      //propozycja (strzał) gracza
-
-        do {
+        while (true) {
             System.out.println("---------------------");
 
-            number = rand.nextInt(6) + 1;
+            int number = player.guess();
             System.out.println("Kostka: " + number);
 
-            guess = rand.nextInt(6) + 1;
-            System.out.println("Gracz: " + guess);
+            int guess = random.nextInt(1, 7);
+            System.out.printf("Gracz %s: %d\n", player.getName(), guess);
 
             if (number != guess) {
                 System.out.println("PUDŁO!");
-            }
-            else {
+            } else {
                 System.out.println("BRAWO!");
+                break;
             }
-
-        } while (number != guess);
+        }
     }
-
 }
