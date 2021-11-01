@@ -1,3 +1,4 @@
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -16,7 +17,8 @@ public class PioGame {
      */
     public static void main(String[] args) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
-        Player player = new Player("Paweł", random);
+//        Player player = new PlayerComp("Komputer", random);
+        Player player = new PlayerHuman("Paweł", new Scanner(System.in));
 
         while (true) {
             System.out.println("---------------------");

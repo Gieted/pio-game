@@ -1,22 +1,14 @@
-import java.util.concurrent.ThreadLocalRandom;
-
-public class Player {
-    private final ThreadLocalRandom random;
+public abstract class Player {
     private final static String DEFAULT_NAME = "Anonim";
     private String name = DEFAULT_NAME;
 
-    public Player(ThreadLocalRandom random) {
-        this.random = random;
-    }
+    public Player() {}
 
-    public Player(String name, ThreadLocalRandom random) {
-        this.random = random;
+    public Player(String name) {
         setName(name);
     }
 
-    public int guess() {
-        return random.nextInt(1, 7);
-    }
+    public abstract int guess();
 
     public String getName() {
         return name;
