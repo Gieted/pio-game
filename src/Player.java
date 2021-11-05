@@ -13,16 +13,16 @@ public abstract class Player {
     public String getName() {
         return name;
     }
+    
+    private static boolean isValidName(String name) {
+        return name.matches("^[\\p{L}\\d_-]{3,}$");
+    }
 
     public void setName(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("'name' cannot be null");
+        if (isValidName(name)) {
+            this.name = name;
+        } else {
+            throw new IllegalArgumentException("Invalid name was provided");
         }
-
-        if (name.isEmpty()) {
-            throw new IllegalArgumentException("'name' cannot be empty");
-        }
-        
-        this.name = name;
     }
 }
