@@ -17,24 +17,12 @@ public class PioGame {
      */
     public static void main(String[] args) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
-//        Player player = new PlayerComp("Komputer", random);
         Player player = new PlayerHuman("Paweł", new Scanner(System.in));
+        Player player2 = new PlayerHuman("Damian", new Scanner(System.in));
 
-        while (true) {
-            System.out.println("---------------------");
-
-            int number = player.guess();
-            System.out.println("Kostka: " + number);
-
-            int guess = random.nextInt(1, 7);
-            System.out.printf("Gracz %s: %d\n", player.getName(), guess);
-
-            if (number != guess) {
-                System.out.println("PUDŁO!");
-            } else {
-                System.out.println("BRAWO!");
-                break;
-            }
-        }
+        Game game = new Game(random);
+        game.addPlayer(player);
+        game.addPlayer(player2);
+        game.play();
     }
 }
