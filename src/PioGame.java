@@ -19,10 +19,12 @@ public class PioGame {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         Player player = new PlayerHuman("Paweł", new Scanner(System.in));
         Player player2 = new PlayerHuman("Damian", new Scanner(System.in));
+        Player bot = new PlayerComp("Komputer", random);
 
         Game game = new Game(random);
         game.addPlayer(player);
         game.addPlayer(player2);
+        game.addPlayer(bot);
         game.play();
     }
 }

@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
-public class Game {
+public final class Game {
     private final ThreadLocalRandom random;
     private final List<Player> players = new ArrayList<>();
     private boolean isFinished = false;
@@ -18,9 +18,9 @@ public class Game {
 
     private void endGame(List<Player> winners) {
         isFinished = true;
-        if (winners.size() > 1) {
-            System.out.println("Gracze: " + winners.stream().map(Player::getName).collect(Collectors.joining(", ")) + "zgadli!");
-        }
+        List<String> names = winners.stream().map(Player::getName).collect(Collectors.toList());
+        System.out.println();
+        System.out.println("Zwycięzcy: " + String.join(", ", names));
     }
 
     private void nextTurn() {
