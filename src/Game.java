@@ -13,7 +13,30 @@ public final class Game {
     }
 
     public void addPlayer(Player player) {
-        players.add(player);
+        if (hasUniqueName(player)) {
+            players.add(player);
+        } else {
+            changeName(player);
+            addPlayer(player);
+        }
+    }
+
+    public void removePlayer(String name) {
+        Player playerToRemove = players.stream()
+                .filter(player -> player.getName().equals(name))
+                .findFirst().orElse(null);
+
+        players.remove(playerToRemove);
+    }
+
+    private void changeName(Player player) {
+        String currentName = player.getName();
+        String newName = StringUtils.incrementPostfix(currentName);
+        player.setName(newName);
+    }
+
+    private boolean hasUniqueName(Player player) {
+        return players.stream().noneMatch(otherPlayer -> player.getName().equals(otherPlayer.getName()));
     }
 
     private void endGame(List<Player> winners) {
@@ -49,5 +72,9 @@ public final class Game {
         while (!isFinished) {
             nextTurn();
         }
+    }
+
+    public void printPlayers() {
+        players.stream().map(Player::getName).forEach(System.out::println);
     }
 }

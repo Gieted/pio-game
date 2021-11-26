@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -17,14 +19,18 @@ public class PioGame {
      */
     public static void main(String[] args) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
-        Player player = new PlayerHuman("Paweł", new Scanner(System.in));
-        Player player2 = new PlayerHuman("Damian", new Scanner(System.in));
-        Player bot = new PlayerComp("Komputer", random);
+        Scanner scanner = new Scanner(System.in);
+        List<Player> players = Arrays.asList(
+                new PlayerHuman("Paweł", scanner),
+                new PlayerHuman("Paweł", scanner),
+                new PlayerHuman("Paweł", scanner),
+                new PlayerComp("Komputer", random)
+        );
 
         Game game = new Game(random);
-        game.addPlayer(player);
-        game.addPlayer(player2);
-        game.addPlayer(bot);
+        players.forEach(game::addPlayer);
+        game.removePlayer("Komputer");
+        game.printPlayers();
         game.play();
     }
 }
