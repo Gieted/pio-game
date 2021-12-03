@@ -5,11 +5,13 @@ import java.util.stream.Collectors;
 
 public final class Game {
     private final ThreadLocalRandom random;
+    private final Statistics statistics;
     private final List<Player> players = new ArrayList<>();
     private boolean isFinished = false;
 
-    public Game(ThreadLocalRandom random) {
+    public Game(ThreadLocalRandom random, Statistics statistics) {
         this.random = random;
+        this.statistics = statistics;
     }
 
     public void addPlayer(Player player) {
@@ -44,6 +46,7 @@ public final class Game {
         List<String> names = winners.stream().map(Player::getName).collect(Collectors.toList());
         System.out.println();
         System.out.println("Zwycięzcy: " + String.join(", ", names));
+        winners.forEach(statistics::notifyGameWonBy);
     }
 
     private void nextTurn() {
