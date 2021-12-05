@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class GameFactory {
+public final class GameFactory {
 
     private final Statistics statistics;
     private final ThreadLocalRandom random;

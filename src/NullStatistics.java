@@ -1,4 +1,4 @@
-public class NullStatistics implements Statistics {
+public final class NullStatistics implements Statistics {
     
     @Override
     public void notifyGameWonBy(Player player) {}
