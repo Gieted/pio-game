@@ -39,7 +39,7 @@ fun main() {
         }
 
         if (playerToRename == null) {
-            someoneHasRepeatedName = true
+            someoneHasRepeatedName = false
         } else {
             playerToRename.name = playerToRename.name.withIncrementedPostfix()
         }
@@ -48,8 +48,8 @@ fun main() {
 
     // play 100 games
     for (i in 1..100) {
-        // play until someone wins
         var someoneWon = false
+        // play until someone wins
         while (!someoneWon) {
             // game starts
             val guesses = players.associateWith {
