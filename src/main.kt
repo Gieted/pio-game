@@ -31,20 +31,26 @@ val players = listOf(
 fun main() {
 
     // ensure all names are unique
-    while (true) {
-        val playerToRename = players.find { player -> 
+    var someoneHasRepeatedName = true
+    while (someoneHasRepeatedName) {
+        val playerToRename = players.find { player ->
             val otherPlayers = (players - player)
             player.name in otherPlayers.map { it.name }
-        } ?: break
-        
-        playerToRename.name = playerToRename.name.withIncrementedPostfix()
+        }
+
+        if (playerToRename == null) {
+            someoneHasRepeatedName = true
+        } else {
+            playerToRename.name = playerToRename.name.withIncrementedPostfix()
+        }
     }
 
 
     // play 100 games
     for (i in 1..100) {
         // play until someone wins
-        while (true) {
+        var someoneWon = false
+        while (!someoneWon) {
             // game starts
             val guesses = players.associateWith {
                 if (it.isComputer) randomNumber(1, 6) else run {
@@ -78,7 +84,7 @@ fun main() {
                 println("Zwycięzcy: $winnerNames")
 
                 winners.forEach { it.wins++ }
-                break
+                someoneWon = true
             }
         }
     }
