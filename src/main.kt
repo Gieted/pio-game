@@ -32,7 +32,11 @@ fun main() {
 
     // ensure all names are unique
     while (true) {
-        val playerToRename = players.find { player -> player.name in (players - player).map { it.name } } ?: break
+        val playerToRename = players.find { player -> 
+            val otherPlayers = (players - player)
+            player.name in otherPlayers.map { it.name }
+        } ?: break
+        
         playerToRename.name = playerToRename.name.withIncrementedPostfix()
     }
 
